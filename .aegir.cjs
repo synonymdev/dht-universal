@@ -1,6 +1,6 @@
 'use strict';
 const crypto = require('crypto');
-const { WebSocketServer } = require('isomorphic-ws');
+const ws = require('isomorphic-ws');
 const ram = require('random-access-memory');
 const DHT = require('@hyperswarm/dht');
 const { relay } = require('@hyperswarm/dht-relay');
@@ -91,17 +91,14 @@ const setupRelay = async (bootstrap) => {
   const dht = new DHT({ bootstrap });
   await dht.ready();
 
-  const server = new WebSocketServer({ port: 0 });
+  const server = new ws.WebSocketServer({ port: 0 });
 
-  const proxies = [];
-
-  server.on('connection', async (socket) => {
-    const stream = new Stream(false, socket);
-    const proxy = await relay(dht, stream);
-    proxies.push(proxy);
+  server.on('connection', (socket) => {
+    relay(dht, new Stream(false, socket));
   });
 
   return {
+    // @ts-ignore
     RELAY_URL: 'ws://127.0.0.1:' + server.address().port,
     closeRelay: () => {
       return Promise.all([dht.destroy(), server.close()]);

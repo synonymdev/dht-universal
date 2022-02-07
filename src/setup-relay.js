@@ -9,7 +9,7 @@ import ws from 'isomorphic-ws'
 /**
  *
  * @param {object} opts
- * @param {*} [opts.dhtOpts]
+ * @param {DHTOpts} [opts.dhtOpts]
  * @param {number} [opts.port=0]
  * @returns
  */
@@ -19,12 +19,8 @@ export const setupRelay = async ({ dhtOpts, port = 0 } = {}) => {
 
   const server = new ws.WebSocketServer({ port })
 
-  const proxies = []
-
-  server.on('connection', async (socket) => {
-    const stream = new Stream(false, socket)
-    const proxy = await relay(dht, stream)
-    proxies.push(proxy)
+  server.on('connection', (socket) => {
+    relay(dht, new Stream(false, socket))
   })
 
   return {
@@ -35,3 +31,7 @@ export const setupRelay = async ({ dhtOpts, port = 0 } = {}) => {
     }
   }
 }
+
+/**
+ * @typedef {import('./interfaces').DHTOpts} DHTOpts
+ */
