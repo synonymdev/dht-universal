@@ -1,6 +1,6 @@
 {
   "name": "dht-universal",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Universal wrapper for @hyperswarm/dht and @hyperswarm/dht-relay working in Node.js and the Browser",
   "type": "module",
   "keywords": [
@@ -42,11 +42,12 @@
   },
   "scripts": {
     "build": "rm -rf dist && aegir build",
-    "test": "npm run test:dht && npm run test:relay",
+    "test": "npm run test:dht && npm run test:relay && npm run test:setup-relay",
     "test:dht": "aegir test -t node -f ./test/dht.spec.js",
     "test:relay:node": "aegir test -t node -f ./test/relay.spec.js",
     "test:relay:browser": "aegir test -t browser -f ./test/relay.spec.js",
     "test:relay": "aegir test -f ./test/relay.spec.js",
+    "test:setup-relay": "aegir test -t node -f ./test/setup-relay.spec.js",
     "lint": "aegir ts -p check && aegir lint --fix",
     "dep-check": "aegir dep-check",
     "publish": "npm publish dist"
@@ -77,6 +78,10 @@
     ".": {
       "import": "./src/dht.js",
       "browser": "./src/relay.js"
+    },
+    "./relay.js": {
+      "import": "./src/setup-relay.js",
+      "browser": "./src/setup-relay.browser.js"
     }
   }
 }

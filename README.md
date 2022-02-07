@@ -70,3 +70,13 @@ import DHT from 'dht-universal';
 ```
 
 Other unit tests are available but might be removed later.
+
+## Setup Relay
+
+This module exposes a helper function to easily run a relay server.
+
+```js
+import { setupRelay } from 'dht-universal/setup-relay.js';
+
+const { port, closeRelay } = await setupRelay({ dhtOpts, port });
+```
