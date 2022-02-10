@@ -10,14 +10,14 @@ import ws from 'isomorphic-ws'
  *
  * @param {object} opts
  * @param {DHTOpts} [opts.dhtOpts]
- * @param {number} [opts.port=0]
+ * @param {import('isomorphic-ws').ServerOptions} [opts.wsServerOptions]
  * @returns
  */
-export const setupRelay = async ({ dhtOpts, port = 0 } = {}) => {
+export const setupRelay = async ({ dhtOpts, wsServerOptions } = {}) => {
   const dht = new DHT(dhtOpts)
   await dht.ready()
 
-  const server = new ws.WebSocketServer({ port })
+  const server = new ws.WebSocketServer(wsServerOptions || { port: 0 })
 
   server.on('connection', (socket) => {
     relay(dht, new Stream(false, socket))

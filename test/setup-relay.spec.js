@@ -10,7 +10,9 @@ it('should not throw an error', async () => {
 })
 
 it('should use the right port', async () => {
-  const { port, closeRelay } = await setupRelay({ port: 8080 })
+  const { port, closeRelay } = await setupRelay({
+    wsServerOptions: { port: 8080 }
+  })
 
   expect(port).to.equal(8080)
 
