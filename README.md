@@ -78,5 +78,5 @@ This module exposes a helper function to easily run a relay server.
 ```js
 import { setupRelay } from 'dht-universal/setup-relay.js';
 
-const { port, closeRelay } = await setupRelay({ dhtOpts, port });
+const { port, closeRelay } = await setupRelay({ dhtOpts, wsServerOptions });
 ```
