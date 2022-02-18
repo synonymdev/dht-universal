@@ -91,7 +91,7 @@ export interface Query extends Readable {
 
 export interface DHTOpts {
   keyPair?: KeyPair
-  bootstrap?: string[]
+  bootstrap?: Array<{ host: string, port: number }>
 }
 
 export declare class DHT {
