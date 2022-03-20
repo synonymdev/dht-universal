@@ -1,6 +1,6 @@
 {
   "name": "dht-universal",
-  "version": "0.3.2",
+  "version": "0.4.0",
   "description": "Universal wrapper for @hyperswarm/dht and @hyperswarm/dht-relay working in Node.js and the Browser",
   "type": "module",
   "keywords": [
@@ -53,8 +53,8 @@
     "publish": "npm publish dist"
   },
   "dependencies": {
-    "@hyperswarm/dht": "^5.0.12",
-    "@hyperswarm/dht-relay": "^0.1.1",
+    "@hyperswarm/dht": "^5.0.17",
+    "@hyperswarm/dht-relay": "^0.2.1",
     "isomorphic-ws": "^4.0.1"
   },
   "devDependencies": {
@@ -77,6 +77,10 @@
   "exports": {
     ".": {
       "import": "./src/dht.js",
+      "browser": "./src/relay.js"
+    },
+    "./relay.js": {
+      "import": "./src/relay.js",
       "browser": "./src/relay.js"
     },
     "./setup-relay.js": {

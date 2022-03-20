@@ -34,6 +34,19 @@ const node = await DHT.create({
 // No need to call `await node.ready()`
 ```
 
+### Relay in Node environment
+
+If you want to use the relay in Node, you can import it explicitly:
+
+```js
+import { DHT } from 'dht-universal/relay.js';
+
+const node = await DHT.create({
+  relays: ['wss://dht-relay.example.com/'],
+  ...opts,
+});
+```
+
 ## API
 
 Should be the same as [@hyperswarm/dht](https://github.com/hyperswarm/dht#api).
